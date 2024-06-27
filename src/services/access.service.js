@@ -2,12 +2,14 @@
 const Shop = require("../models/shop.model");
 const bcrypt = require("bcrypt");
 const crypto = require("node:crypto");
-const { createTokensPair } = require("../auth/authUtils");
+const { createTokensPair, verifyJWT } = require("../auth/authUtils");
 const KeyTokenService = require("./keyToken.service");
 const { getInfoData } = require("../utils/lodash");
 const {
   BadRequestError,
   ConflictRequestError,
+  ForbiddenError,
+  AuthFailureError,
 } = require("../core/error.response");
 const { findByEmail } = require("./shop.service");
 const RoleShop = {
@@ -18,6 +20,55 @@ const RoleShop = {
 };
 
 class AccessService {
+  static handleRefreshToken = async (refreshToken) => {
+    // check token da duoc su dung chua
+    const foundToken = await KeyTokenService.findByRefreshTokenUsed(
+      refreshToken
+    );
+    // console.log("User1::", { userId, email });
+    console.log("User1::", foundToken);
+    if (foundToken) {
+      const { userId, email } = await verifyJWT(
+        refreshToken,
+        foundToken.privateKey
+      );
+      // xoa tat ca token trong keyStore
+      await KeyTokenService.deleteKeyById(userId);
+      throw new ForbiddenError("Something went wrong. Pls re-login");
+    }
+    // refreshToken don't use
+    const holderToken = await KeyTokenService.findByRefreshToken(refreshToken);
+    if (!holderToken) throw new AuthFailureError("Shop not found");
+    // verify token
+    const { userId, email } = await verifyJWT(
+      refreshToken,
+      holderToken.privateKey
+    );
+    const tokens = await createTokensPair(
+      { userId, email },
+      holderToken.publicKey,
+      holderToken.privateKey
+    );
+    // update token
+    await holderToken.updateOne({
+      $set: {
+        refreshToken: tokens.refreshToken,
+      },
+      $addToSet: {
+        refreshTokenUsed: refreshToken,
+      },
+    });
+    return {
+      user: { userId, email },
+      tokens,
+    };
+  };
+
+  static logout = async (keyStore) => {
+    const delKey = await KeyTokenService.removeById(keyStore._id);
+    console.log(delKey);
+    return delKey;
+  };
   /**
    * check email in dbs
    * match password
@@ -28,7 +79,7 @@ class AccessService {
   static login = async ({ email, password, refreshToken = null }) => {
     // 1. Check email in dbs
     const foundUser = await findByEmail({ email });
-    console.log(foundUser)
+    console.log(foundUser);
     if (!foundUser) throw new BadRequestError(`Could not find email`);
     // 2. Match password
     const isMatch = await bcrypt.compare(password, foundUser.password);
