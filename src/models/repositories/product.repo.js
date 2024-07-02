@@ -2,7 +2,11 @@
 
 const { Types } = require("mongoose");
 const { product } = require("../product.model");
-const { getUnSelectData, getSelectData } = require("../../utils");
+const {
+  getUnSelectData,
+  getSelectData,
+  convertToObjMongo,
+} = require("../../utils");
 
 const findAllDraftProducts = async ({ query, limit, skip }) => {
   return queryProducts({ query, limit, skip });
@@ -82,6 +86,9 @@ async function findAllProduct({ limit, sort, page, filter, select }) {
 async function findProduct({ product_id, unSelect }) {
   return await product.findById(product_id).select(getUnSelectData(unSelect));
 }
+async function getProductById(productId) {
+  return await product.findOne({ _id: convertToObjMongo(productId) }).lean();
+}
 const removeUndefinedNullObject = (obj) => {
   const result = {};
 
@@ -102,17 +109,16 @@ const removeUndefinedNullObject = (obj) => {
   return result;
 };
 const updateNestedObjectParser = (obj, parent, result = {}) => {
-  Object.keys(obj).forEach(k => {
-    const propName = parent ? `${parent}.${k}` : k
-    if (typeof obj[k] == 'object' && !Array.isArray(obj[k])) {
-      updateNestedObjectParser(obj[k], propName, result)
+  Object.keys(obj).forEach((k) => {
+    const propName = parent ? `${parent}.${k}` : k;
+    if (typeof obj[k] == "object" && !Array.isArray(obj[k])) {
+      updateNestedObjectParser(obj[k], propName, result);
+    } else {
+      result[propName] = obj[k];
     }
-    else {
-      result[propName] = obj[k]
-    }
-  })
-  return result
-}
+  });
+  return result;
+};
 const updateProductById = async ({
   productId,
   bodyUpdate,
@@ -122,6 +128,20 @@ const updateProductById = async ({
   return await model.findByIdAndUpdate(productId, bodyUpdate, {
     new: isNew,
   });
+};
+const checkProductByServer = async (products) => {
+  return await Promise.all(
+    products.map(async (product) => {
+      const foundProduct = await getProductById(product.productId);
+      if (foundProduct) {
+        return {
+          price: foundProduct.product_price,
+          quantity: product.quantity,
+          productId: product.productId,
+        };
+      }
+    })
+  );
 };
 module.exports = {
   findAllDraftProducts,
@@ -133,5 +153,7 @@ module.exports = {
   findProduct,
   removeUndefinedNullObject,
   updateNestedObjectParser,
-  updateProductById
+  updateProductById,
+  getProductById,
+  checkProductByServer
 };
