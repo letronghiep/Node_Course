@@ -1,6 +1,7 @@
 "use strict";
 const { BadRequestError } = require("../core/error.response");
 const { product, clothing, electronic } = require("../models/product.model");
+const { insertInventory } = require("../models/repositories/inventory.repo");
 const {
   findAllDraftProducts,
   findAllPublishedProducts,
@@ -63,7 +64,12 @@ class ProductFactory {
       sort,
       page,
       filter,
-      select: ["product_name", "product_price", "product_thumb"],
+      select: [
+        "product_name",
+        "product_price",
+        "product_thumb",
+        "product_shop",
+      ],
     });
   }
   static async findProduct({ product_id }) {
@@ -98,7 +104,15 @@ class Product {
   }
   //   create product
   async createProduct(product_id) {
-    return await product.create({ ...this, _id: product_id });
+    const newProduct = await product.create({ ...this, _id: product_id });
+    if (newProduct) {
+      await insertInventory({
+        productId: newProduct._id,
+        shopId: this.product_shop,
+        stock: this.product_quantity,
+      });
+    }
+    return newProduct;
   }
   async updateProduct(productId, payload) {
     return await product.findByIdAndUpdate(productId, payload, {

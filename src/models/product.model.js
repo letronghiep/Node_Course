@@ -87,7 +87,7 @@ var clothingSchema = new Schema(
     },
   },
   {
-    collection: "Clothings",
+    collection: "clothings",
     timestamps: true,
   }
 );
@@ -106,7 +106,7 @@ var electronicSchema = new Schema(
     },
   },
   {
-    collection: "Electronics",
+    collection: "electronics",
     timestamps: true,
   }
 );
