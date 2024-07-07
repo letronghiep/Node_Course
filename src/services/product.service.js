@@ -14,6 +14,7 @@ const {
   removeUndefinedNullObject,
   updateProductById,
 } = require("../models/repositories/product.repo");
+const { pushNotifyToSystem } = require("./notification.service");
 class ProductFactory {
   static async createProduct(type, payload) {
     switch (type) {
@@ -111,6 +112,18 @@ class Product {
         shopId: this.product_shop,
         stock: this.product_quantity,
       });
+      // push notify to system
+      pushNotifyToSystem({
+        type: "SHOP-001",
+        receiverId: 1,
+        senderId: this.product_shop,
+        options: {
+          product_name: this.product_name,
+          shop_name: this.product_shop,
+        },
+      })
+        .then((rs) => console.log(rs))
+        .catch((error) => console.log(error));
     }
     return newProduct;
   }
