@@ -1,0 +1,7 @@
+2024-07-10 11-05-49::info::/v1/api/shop/login::86795c05-68da-483b-b704-729e97f39d1f::input params::POST::{"email":"letronghiep@gmail.com","password":"abc123"}
+2024-07-10 11-08-06::info::/v1/api/shop/login::6c2fa936-5b60-4ab8-a343-33a27e447f8b::input params::POST::{"email":"letronghiep@gmail.com","password":"abc123"}
+2024-07-10 11-08-30::info::/v1/api/shop/login::90a6b7c5-1b4a-4f5c-b439-b06d70f5b847::input params::POST::{"email":"letronghiep@gmail.com","password":"abc123"}
+2024-07-10 11-10-01::info::/v1/api/shop/login::c43e56e2-0a0e-415a-b9b5-dabf07bfe3b4::input params::POST::{"email":"letronghiep@gmail.com","password":"abc123"}
+2024-07-10 11-11-01::info::/v1/api/shop/login::2b503f7b-dc7e-4648-a93b-50e73933bd9f::input params::POST::{"email":"letronghiep@gmail.com","password":"abc123"}
+2024-07-10 11-11-17::info::/v1/api/shop/login::63cc338e-b995-4968-be47-8a0db28d295f::input params::POST::{"email":"letronghie3p@gmail.com","password":"abc123"}
+2024-07-10 11-11-17::error::/v1/api/shop/login::63cc338e-b995-4968-be47-8a0db28d295f::403 - 1ms - Response: {"status":403,"now":1720584677636}::{"message":"Could not find email"}

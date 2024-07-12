@@ -1,0 +1,10 @@
+2024-07-11 09-42-12::info::/v1/api/user/new_user::e2dfccd1-2c31-4f04-be40-8c2af4c52c22::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-45-04::info::/v1/api/user/new_user::36ba77dd-8c13-46a3-bd4b-87adf538a588::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-47-03::info::/v1/api/user/new_user::f96f2323-2aa9-4708-9055-fff667d28845::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-48-17::info::/v1/api/user/new_user::95107fea-26bb-4350-83c9-71bb20dafbb3::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-49-00::info::/v1/api/user/new_user::72f5177b-da53-4e39-b106-772fbf925f20::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-49-55::info::/v1/api/user/new_user::15d9799e-239d-4414-8c97-e5efa1c3185a::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-50-21::info::/v1/api/user/new_user::11376f15-952a-4130-b2d4-cd9fe9ecdaf7::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-54-36::info::/v1/api/email/new_template::f5858706-5f32-4b07-a2fa-27188e8995dc::input params::POST::{"tem_id":1001,"tem_name":"HTML TOknen"}
+2024-07-11 09-54-43::info::/v1/api/user/new_user::1a740594-00fa-43b3-831c-e0509755a929::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 09-56-25::info::/v1/api/user/new_user::4034dbd8-36ce-4f4a-b350-14ce7caef607::input params::POST::{"email":"letronghiep213@gmail.com"}

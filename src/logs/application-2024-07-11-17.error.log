@@ -1,0 +1,1 @@
+2024-07-11 17-31-46::error::/v1/api/products/spu/new::a92e8bd8-c9e3-4131-ba6e-4cfbc34dd77a::undefined - NaNms - Response: {"name":"JsonWebTokenError","message":"invalid signature"}::{"message":"invalid signature"}

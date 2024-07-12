@@ -1,0 +1,15 @@
+2024-07-11 10-01-24::info::/v1/api/user/new_user::d50213a0-05b3-4d8b-a978-536d1a149ed4::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-02-21::info::/v1/api/email/new_template::518b5c49-b655-448c-b732-8ff8b2eebbeb::input params::POST::{"tem_id":1001,"tem_name":"HTML EMAIL TOKEN"}
+2024-07-11 10-02-25::info::/v1/api/user/new_user::d5916389-c720-4f5d-b829-44a8b84d9260::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-03-52::info::/v1/api/user/new_user::d439abf3-0fe0-44d9-9804-75c261c2a161::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-04-06::info::/v1/api/user/new_user::30becbea-5226-473a-82ba-821d80f7a1f3::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-08-53::info::/v1/api/user/new_user::8b5784de-9551-49d8-a32d-67a8d5523005::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-21-37::info::/v1/api/user/new_user::bdd0c5bf-8869-4f3d-8f9b-a5af3ab738a4::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-30-09::info::/v1/api/user/new_user::f3c1f4ab-3c21-4f41-a1ad-7adc0d5dda03::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-36-51::info::/v1/api/user/new_user::fe45b4bc-6966-4de4-903e-bbe47b416da7::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-37-16::info::/v1/api/user/new_user::0e1e6fef-8f91-4938-9f74-1173416ae503::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-40-49::info::/v1/api/user/new_user::1b999676-1fdd-4b42-912f-02e46ec71964::input params::POST::{"email":"letronghiep213@gmail.com"}
+2024-07-11 10-43-15::info::/v1/api/user/new_user::47549723-426a-4341-9fd2-08a8c75f8ad0::input params::POST::{"email":"hieple1301@gmail.com"}
+2024-07-11 10-45-36::info::/v1/api/user/new_user::7760b51f-42e1-4a57-b529-8171355abe2f::input params::POST::{"email":"hieple1301@gmail.com"}
+2024-07-11 10-46-35::info::/v1/api/user/new_user::e4942e03-ee07-4da1-8c59-6c7931ba9d68::input params::POST::{"email":"hieple1301@gmail.com"}
+2024-07-11 10-46-59::info::/v1/api/user/new_user::205e5920-1356-4553-bf76-4f1707c94413::input params::POST::{"email":"letronghiep213@gmail.com"}
