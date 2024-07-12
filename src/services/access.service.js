@@ -134,6 +134,7 @@ class AccessService {
     });
     // 5. Get data and return login
     return {
+      code: 200,
       shop: getInfoData({
         field: ["_id", "name", "email"],
         object: foundUser,

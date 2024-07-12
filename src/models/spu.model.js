@@ -1,11 +1,15 @@
 const { Schema, Types, model } = require("mongoose"); // Erase if already required
 const slugify = require("slugify");
-const DOCUMENT_NAME = "Product";
-const COLLECTION_NAME = "products";
+const DOCUMENT_NAME = "SPU";
+const COLLECTION_NAME = "spues";
 
 // Declare the Schema of the Mongo model
-var productSchema = new Schema(
+var spuSchema = new Schema(
   {
+    product_id: {
+      type: String,
+      default: "",
+    },
     product_name: {
       type: String,
       required: true,
@@ -20,15 +24,19 @@ var productSchema = new Schema(
       type: Number,
       required: true,
     },
+    product_category: {
+      type: Array,
+      default: [],
+    },
     product_quantity: {
       type: Number,
       required: true,
     },
-    product_type: {
-      type: String,
-      required: true,
-      enum: ["Electronics", "Clothing", "Furniture"],
-    },
+    // product_type: {
+    //   type: String,
+    //   required: true,
+    //   enum: ["Electronics", "Clothing", "Furniture"],
+    // },
     product_shop: {
       type: Schema.Types.ObjectId,
       ref: "Shop",
@@ -98,54 +106,11 @@ var productSchema = new Schema(
     timestamps: true,
   }
 );
-productSchema.index({ product_name: "text", product_description: "text" });
+spuSchema.index({ product_name: "text", product_description: "text" });
 // Document middleware: runs save(), create()
-productSchema.pre("save", function (next) {
+spuSchema.pre("save", function (next) {
   this.product_slug = slugify(this.product_name, { lower: true });
   next();
 });
-
-var clothingSchema = new Schema(
-  {
-    brand: {
-      type: String,
-      required: true,
-    },
-    size: String,
-    material: String,
-    product_shop: {
-      type: Schema.Types.ObjectId,
-      ref: "Shop",
-    },
-  },
-  {
-    collection: "clothings",
-    timestamps: true,
-  }
-);
-
-var electronicSchema = new Schema(
-  {
-    manufacturer: {
-      type: String,
-      required: true,
-    },
-    model: String,
-    color: String,
-    product_shop: {
-      type: Schema.Types.ObjectId,
-      ref: "Shop",
-    },
-  },
-  {
-    collection: "electronics",
-    timestamps: true,
-  }
-);
-
 //Export the model
-module.exports = {
-  product: model(DOCUMENT_NAME, productSchema),
-  clothing: model("Clothing", clothingSchema),
-  electronic: model("Electronic", electronicSchema),
-};
+module.exports = model(DOCUMENT_NAME, spuSchema);

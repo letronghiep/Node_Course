@@ -8,14 +8,19 @@
 //   FORBIDDEN: "Bad request error",
 //   CONFLICT: "Conflict error",
 // };
-const {
-  ReasonPhrases,
-  StatusCodes,
-} = require("../utils/httpStatusCode");
+const myLogger = require("../loggers/mylogger");
+const { ReasonPhrases, StatusCodes } = require("../utils/httpStatusCode");
 class ErrorResponse extends Error {
   constructor(message, status) {
     super(message);
     this.status = status;
+    this.now = Date.now();
+
+    // myLogger.error(this.message, [
+    //   "/v1/api/shop/login",
+    //   "vv33344",
+    //   { error: "Bad Request Error" },
+    // ]);
   }
 }
 

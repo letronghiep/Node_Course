@@ -1,5 +1,6 @@
 "use strict";
 
+const { BadRequestError } = require("../core/error.response");
 const { CREATED, SuccessResponse } = require("../core/success.response");
 const AccessService = require("../services/access.service");
 
@@ -25,11 +26,24 @@ class AccessController {
     }).send(res);
   };
   login = async (req, res) => {
-    new SuccessResponse({
-      message: "Login success",
+    const { email } = req.body;
+    if (!email) throw new BadRequestError("email missing....");
+    const sendData = Object.assign(
+      {
+        requestId: req.requestId,
+      },
+      req.body
+    );
+    const { code, ...result } = await AccessService.login(sendData);
+    console.log(code);
+    console.log("result", result);
+    if (code === 200) {
+      new SuccessResponse({
+        message: "Login success",
 
-      metadata: await AccessService.login(req.body),
-    }).send(res);
+        metadata: result,
+      }).send(res);
+    }
   };
   signUp = async (req, res, next) => {
     new CREATED({
